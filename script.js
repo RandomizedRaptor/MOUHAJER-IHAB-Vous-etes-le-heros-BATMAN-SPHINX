@@ -112,4 +112,6 @@ function goToChapter(chapter) {
   }
 }
 
+twist
+
 goToChapter("debut");
