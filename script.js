@@ -31,7 +31,7 @@ const chapters = {
     titre: `La carte`,
     description: `Vous trouvez la carte de l'immeuble!`,
     image: "./assets/images/carte.jpg",
-    boutons: [{ titre: `Retourner`, destination: `debut` }],
+    boutons: [{ titre: `Retourner`, destination: `enigme` }],
   },
   bombe: {
     titre: `Il y a une bombe`,
@@ -62,10 +62,6 @@ const chapters = {
     image: "./assets/images/enigmeFinal.jpg",
     boutons: [
       { titre: `Resoudre l'enigme`, destination: `sphinxConfusion` },
-      {
-        titre: `Affronter le Sphinx (grace a la carte)`,
-        destination: `victoire`,
-      },
       { titre: `Le convaincre de se rendre`, destination: `sphinxRefuse` },
     ],
   },
@@ -112,6 +108,13 @@ function goToChapter(chapter) {
   }
 }
 
-twist
+if (chapters === "secret") {
+  const btnVictoire = document.createElement("button");
+  btnVictoire.textContent = "Affronter le Sphinx";
+  btnVictoire.addEventListener("click", () => {
+    goToChapter("victoire");
+  });
+  boutons.appendChild(btnVictoire);
+}
 
 goToChapter("debut");
