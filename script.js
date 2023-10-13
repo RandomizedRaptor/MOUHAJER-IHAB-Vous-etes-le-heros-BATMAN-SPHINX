@@ -1,4 +1,4 @@
-let chapters = {
+const chapters = {
     debut: {
         titre : `Batman: le retour du Sphinx`,
         description: `Le Sphinx tient un immeuble en otage avec une bombe. Le symbol de Batman apparait dans le ciel.`,
@@ -54,7 +54,7 @@ let chapters = {
     sphinx: {
         titre : `Le Sphinx`,
         description: 'Il se cache derriere une barriere, il y a une sortie en arriere de lui.',
-        image: './assets/images/',
+        image: './assets/images/sphinx.jpg',
         boutons: [
             {titre: `Continuer`, destination: `enigmeFinal`}
         ]
@@ -62,7 +62,7 @@ let chapters = {
     mort: {
         titre : `Ouch!`,
         description: `Il n'y a pas assez de temps pour recevoir de l'aide. Vous mourrez...`,
-        image: './assets/images/',
+        image: './assets/images/mort.webp',
         boutons: [
             {titre: `Recommencer`, destination: `debut`}
         ]
@@ -70,7 +70,7 @@ let chapters = {
     enigmeFinal: {
         titre : `L'enigme final`,
         description: 'Le Sphinx vous donne une enigme final a resoudre.',
-        image: './assets/images/enigmeFinal',
+        image: './assets/images/enigmeFinal.jpg',
         boutons: [
             {titre: `Resoudre l'enigme`, destination: `sphinxConfusion`},
             {titre: `Affronter le Sphinx (grace a la carte)`, destination: `victoire`},
@@ -80,7 +80,7 @@ let chapters = {
     sphinxConfusion: {
         titre : `Confusion`,
         description: `Le Sphinx s'enfuit durant la confusion.`,
-        image: './assets/images/confusion',
+        image: './assets/images/confusion.jpg',
         boutons: [
             {titre: `Recommencer`, destination: `debut`}
         ]
@@ -88,7 +88,7 @@ let chapters = {
     victoire: {
         titre : `Victoire!`,
         description: 'Vous trouver, battez et capturer le Sphinx!',
-        image: './assets/images/batman',
+        image: './assets/images/batman.webp',
         boutons: [
             {titre: `Recommencer`, destination: `debut`}
         ]
@@ -96,7 +96,7 @@ let chapters = {
     sphinxRefuse: {
         titre : `Il... refuse?`,
         description: `Le Sphinx refuse et s'enfuit`,
-        image: './assets/images/confusion',
+        image: './assets/images/confusion.jpg',
         boutons: [
             {titre: `Recommencer`, destination: `debut`}
         ]
@@ -104,12 +104,26 @@ let chapters = {
 };
  
 function goToChapter(chapter) {
-    if (typeof chapter === 'object') {
-        console.log(chapter.titre);
-        console.log(chapter.description);
-        console.log(chapter.boutons);
+    const boutons = document.querySelector('.boutons');
+    while (boutons.firstChild) {
+    boutons.removeChild(boutons.firstChild);
+    }
+
+    if (chapters[chapter]) {
+        document.querySelector('.titre2').innerText = chapters[chapter].titre;
+        document.querySelector('.fictif').innerText = chapters[chapter].description;
+        document.querySelector("img").src = chapters[chapter].image;
+        for (let i = 0; i < chapters[chapter].boutons.length; i++) {
+            const nouveauBtn = document.createElement('button'); 
+            nouveauBtn.textContent = chapters[chapter].boutons[i].titre; 
+            nouveauBtn.addEventListener('click', () => { 
+                goToChapter(chapters[chapter].boutons[i].destination); 
+            }); 
+            boutons.appendChild(nouveauBtn); 
+        } 
     } else {
         console.log('Erreur 🤓');
-}};
+    }
+}
 
-goToChapter(chapters.debut);
+goToChapter('debut');
