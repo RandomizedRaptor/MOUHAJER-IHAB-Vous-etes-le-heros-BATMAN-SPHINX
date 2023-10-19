@@ -1,0 +1,88 @@
+:root {
+    --bleu: #679BF1;
+    --bleu-pale: #8AB9F1;
+    --jaune: #FFC40A;
+    --jaune-pale: #F8DE7E;
+    --gris: #2F2E2C;
+    --noir: #050505;
+  }
+
+@font-face {
+    font-family: super;
+    src: url(../fonts/Super\ Comic.ttf);
+}
+
+@font-face {
+    font-family: "Comic Sans";
+    src: url(../fonts/Ldfcomicsansbold-zgma.ttf);
+}
+
+*{
+    margin: 0;
+    font-family: "Comic Sans";
+    color: var(--noir);
+}
+
+body {
+    background-color: var(--gris);
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#jeu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 800px;
+    height: 800px;
+    background-color: var(--bleu);
+    border: 5px solid var(--jaune);
+    border-radius: 20px;
+    padding: 50px;
+    box-shadow: 0px 0px 35px 10px var(--noir);
+}
+
+img {
+    width: 100%;
+}
+
+.titre {
+    font-family: super;
+    margin: 10px;
+}
+
+.titre2 {
+    font-family: super;
+    margin: 10px;
+}
+
+.fictif {
+    font-size: 22px;
+    margin: 10px;
+}
+
+
+.boutons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    background-color: var(--jaune-pale);
+    padding: 20px;
+    width: 25%;
+    font-size: 22px;
+    border: 3px solid var(--jaune);
+    border-radius: 10px;
+}
+
+button:hover {
+    background-color: var(--jaune);
+}
