@@ -8,7 +8,7 @@ const chapters = {
   enigme: {
     titre: `L'enigme`,
     description: "Le Sphinx vous donne une enigme a resoudre.",
-    image: "./assets/images/enigme.webp",
+    image: "./assets/images/enigme.jpg",
     boutons: [
       { titre: `Abandonner`, destination: `reputation` },
       { titre: `Resoudre l'enigme`, destination: `compte` },
@@ -17,7 +17,7 @@ const chapters = {
   },
   reputation: {
     titre: `Votre reputation est ruinee`,
-    description: " ",
+    description: "womp womp ",
     image: "./assets/images/reputation.webp",
     boutons: [{ titre: `Recommencer`, destination: `debut` }],
   },
@@ -74,7 +74,7 @@ const chapters = {
   victoire: {
     titre: `Victoire!`,
     description: "Vous trouver, battez et capturer le Sphinx!",
-    image: "./assets/images/batman.webp",
+    image: "./assets/images/batman.jpg",
     boutons: [{ titre: `Recommencer`, destination: `debut` }],
   },
   sphinxRefuse: {
