@@ -97,6 +97,10 @@ function goToChapter(chapter) {
     hasVisitedSecret = true;
   }
 
+  if (chapters[chapter] && chapter === "debut") {
+    hasVisitedSecret = false;
+  }
+
   if (chapters[chapter]) {
     document.querySelector(".titre2").innerText = chapters[chapter].titre;
     document.querySelector(".fictif").innerText = chapters[chapter].description;
