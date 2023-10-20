@@ -3,4 +3,4 @@
 
 ## Diagramme:
 
-<img src="assets/schema.png">
+<img src="./assets/drawio/schema.png">
