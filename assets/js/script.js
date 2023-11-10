@@ -3,12 +3,14 @@ const chapters = {
     titre: ``,
     description: `Le Sphinx tient un immeuble en otage avec une bombe. Le symbol de Batman apparait dans le ciel.`,
     image: "./assets/images/logo.png",
+    audio: "./assets/audio/Whoosh.mp3",
     boutons: [{ titre: `Repondre a l'appel`, destination: `enigme` }],
   },
   enigme: {
     titre: `L'enigme`,
     description: "Le Sphinx vous donne une enigme a resoudre.",
     image: "./assets/images/enigme.jpg",
+    audio: "./assets/audio/Whoosh.mp3",
     boutons: [
       { titre: `Abandonner`, destination: `reputation` },
       { titre: `Resoudre l'enigme`, destination: `compte` },
@@ -19,18 +21,21 @@ const chapters = {
     titre: `Votre reputation est ruinee`,
     description: "womp womp ",
     image: "./assets/images/reputation.webp",
+    audio: "./assets/audio/Error.mp3",
     boutons: [{ titre: `Recommencer`, destination: `debut` }],
   },
   compte: {
     titre: `Compte a rebours`,
     description: `Plus loin dans l'immeuble, un ecran afficheun compte a rebours.`,
     image: "./assets/images/compte.jpg",
+    audio: "./assets/audio/Whoosh.mp3",
     boutons: [{ titre: `Continuer`, destination: `bombe` }],
   },
   secret: {
     titre: `La carte`,
     description: `Vous trouvez la carte de l'immeuble!`,
     image: "./assets/images/carte.jpg",
+    audio: "./assets/audio/Secret.mp3",
     boutons: [{ titre: `Retourner`, destination: `enigme` }],
   },
   bombe: {
@@ -38,6 +43,7 @@ const chapters = {
     description: `La bombe est sur le point d'exploser!`,
     image: "./assets/images/bombe.webp",
     video: "./assets/images/bombe.mp4",
+    audio: "./assets/audio/Whoosh.mp3",
     boutons: [
       { titre: `Fuir`, destination: `reputation` },
       { titre: `Desamorcer la bombe`, destination: `sphinx` },
@@ -49,18 +55,21 @@ const chapters = {
     description:
       "Il se cache derriere une barriere, il y a une sortie en arriere de lui.",
     image: "./assets/images/sphinx.jpg",
+    audio: "./assets/audio/Whoosh.mp3",
     boutons: [{ titre: `Continuer`, destination: `enigmeFinal` }],
   },
   mort: {
     titre: `Ouch!`,
     description: `Il n'y a pas assez de temps pour recevoir de l'aide. Vous mourrez...`,
     image: "./assets/images/mort.webp",
+    audio: "./assets/audio/Boom.mp3",
     boutons: [{ titre: `Recommencer`, destination: `debut` }],
   },
   enigmeFinal: {
     titre: `L'enigme final`,
     description: "Le Sphinx vous donne une enigme final a resoudre.",
     image: "./assets/images/enigmeFinal.jpg",
+    audio: "./assets/audio/Whoosh.mp3",
     boutons: [
       { titre: `Resoudre l'enigme`, destination: `sphinxConfusion` },
       { titre: `Le convaincre de se rendre`, destination: `sphinxRefuse` },
@@ -70,6 +79,7 @@ const chapters = {
     titre: `Confusion`,
     description: `Le Sphinx s'enfuit durant la confusion.`,
     image: "./assets/images/confusion.jpg",
+    audio: "./assets/audio/Bamboo.mp3",
     boutons: [{ titre: `Recommencer`, destination: `debut` }],
   },
   victoire: {
@@ -77,12 +87,14 @@ const chapters = {
     description: "Vous trouver, battez et capturer le Sphinx!",
     image: "./assets/images/batman.jpg",
     video: "./assets/images/dance.mp4",
+    audio: "./assets/audio/Batman.mp3",
     boutons: [{ titre: `Recommencer`, destination: `debut` }],
   },
   sphinxRefuse: {
     titre: `Il... refuse?`,
     description: `Le Sphinx refuse et s'enfuit`,
     image: "./assets/images/confusion.jpg",
+    audio: "./assets/audio/Bamboo.mp3",
     boutons: [{ titre: `Recommencer`, destination: `debut` }],
   },
 };
@@ -107,7 +119,6 @@ function goToChapter(chapter) {
   if (chapters[chapter]) {
     document.querySelector(".titre2").innerText = chapters[chapter].titre;
     document.querySelector(".fictif").innerText = chapters[chapter].description;
-    document.querySelector("img").src = chapters[chapter].image;
     for (let i = 0; i < chapters[chapter].boutons.length; i++) {
       const nouveauBtn = document.createElement("button");
       nouveauBtn.textContent = chapters[chapter].boutons[i].titre;
@@ -120,6 +131,7 @@ function goToChapter(chapter) {
     console.log("Erreur 🤓");
   }
 
+  //twist
   if (chapter === "enigmeFinal" && hasVisitedSecret) {
     const boutons = document.querySelector(".boutons");
     const btnVictoire = document.createElement("button");
@@ -130,20 +142,35 @@ function goToChapter(chapter) {
     boutons.appendChild(btnVictoire);
   }
 
+  //creation des medias
   const media = document.querySelector(".media");
+  const video = document.createElement("video");
+  const image = document.createElement("img");
+  const audio = document.createElement("audio");
 
   if (chapters[chapter].video) {
+    media.innerHTML = "";
     hasVideo = true;
-    const video = document.createElement("video");
     video.src = chapters[chapter].video;
     video.autoplay = true;
     video.loop = true;
     video.muted = true;
     media.appendChild(video);
   } else {
+    media.innerHTML = "";
     hasVideo = false;
+    image.src = chapters[chapter].image;
+    media.appendChild(image);
   }
 
+  if (chapters[chapter].audio) {
+    audio.src = chapters[chapter].audio;
+    audio.autoplay = true;
+    video.muted = true;
+    media.appendChild(audio);
+  }
+
+  //verificateurs
   console.log("Voici le chapitre:", chapter);
   console.log("hasVisitedSecret:", hasVisitedSecret);
   console.log("hasVideo", hasVideo);
