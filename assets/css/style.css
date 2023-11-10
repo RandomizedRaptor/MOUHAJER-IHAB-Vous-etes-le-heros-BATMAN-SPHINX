@@ -52,6 +52,14 @@ img {
     width: 100%;
 }
 
+video {
+    width: 100%;
+}
+
+.media {
+    width: 100%;
+}
+
 .titre {
     font-family: super;
     margin: 10px;

@@ -37,6 +37,7 @@ const chapters = {
     titre: `Il y a une bombe`,
     description: `La bombe est sur le point d'exploser!`,
     image: "./assets/images/bombe.webp",
+    video: "./assets/images/bombe.mp4",
     boutons: [
       { titre: `Fuir`, destination: `reputation` },
       { titre: `Desamorcer la bombe`, destination: `sphinx` },
@@ -75,6 +76,7 @@ const chapters = {
     titre: `Victoire!`,
     description: "Vous trouver, battez et capturer le Sphinx!",
     image: "./assets/images/batman.jpg",
+    video: "./assets/images/dance.mp4",
     boutons: [{ titre: `Recommencer`, destination: `debut` }],
   },
   sphinxRefuse: {
@@ -86,6 +88,7 @@ const chapters = {
 };
 
 let hasVisitedSecret = false;
+let hasVideo = false;
 
 function goToChapter(chapter) {
   const boutons = document.querySelector(".boutons");
@@ -127,8 +130,23 @@ function goToChapter(chapter) {
     boutons.appendChild(btnVictoire);
   }
 
+  const media = document.querySelector(".media");
+
+  if (chapters[chapter].video) {
+    hasVideo = true;
+    const video = document.createElement("video");
+    video.src = chapters[chapter].video;
+    video.autoplay = true;
+    video.loop = true;
+    video.muted = true;
+    media.appendChild(video);
+  } else {
+    hasVideo = false;
+  }
+
   console.log("Voici le chapitre:", chapter);
   console.log("hasVisitedSecret:", hasVisitedSecret);
+  console.log("hasVideo", hasVideo);
 }
 
 goToChapter("debut");
