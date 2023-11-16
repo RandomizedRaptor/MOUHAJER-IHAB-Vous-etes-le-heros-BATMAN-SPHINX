@@ -174,6 +174,13 @@ function goToChapter(chapter) {
   console.log("Voici le chapitre:", chapter);
   console.log("hasVisitedSecret:", hasVisitedSecret);
   console.log("hasVideo", hasVideo);
+
+  //local storage
+  const reini = document.querySelector(".reini");
+  reini.addEventListener("click", function() {
+  localStorage.clear();
+  goToChapter("debut");
+  });
 }
 
 goToChapter("debut");
