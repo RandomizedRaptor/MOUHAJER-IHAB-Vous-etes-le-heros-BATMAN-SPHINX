@@ -3,7 +3,7 @@ const chapters = {
     titre: ``,
     description: `Le Sphinx tient un immeuble en otage avec une bombe. Le symbol de Batman apparait dans le ciel.`,
     image: "./assets/images/logo.png",
-    audio: "./assets/audio/Whoosh.mp3",
+    audio: "./assets/audio/Batman.mp3",
     boutons: [{ titre: `Repondre a l'appel`, destination: `enigme` }],
   },
   enigme: {
@@ -103,17 +103,11 @@ let hasVisitedSecret = false;
 let hasVideo = false;
 
 function goToChapter(chapter) {
+  localStorage.setItem('chapter', chapter);
+
   const boutons = document.querySelector(".boutons");
   while (boutons.firstChild) {
     boutons.removeChild(boutons.firstChild);
-  }
-
-  if (chapters[chapter] && chapter === "secret") {
-    hasVisitedSecret = true;
-  }
-
-  if (chapters[chapter] && chapter === "debut") {
-    hasVisitedSecret = false;
   }
 
   if (chapters[chapter]) {
@@ -131,8 +125,24 @@ function goToChapter(chapter) {
     console.log("Erreur 🤓");
   }
 
+  if (chapters[chapter] && chapter === "secret") {
+    localStorage.setItem('hasVisitedSecret', 'yes');
+  }
+
+  if (chapters[chapter] && chapter === "debut") {
+    localStorage.setItem('hasVisitedSecret', 'no');
+  }
+
+  if (localStorage.getItem('hasVisitedSecret') === 'yes') {
+    hasVisitedSecret = true;
+  }
+
+  if (localStorage.getItem('hasVisitedSecret') === 'no') {
+    hasVisitedSecret = false;
+  }
+
   //twist
-  if (chapter === "enigmeFinal" && hasVisitedSecret) {
+  if (chapter === "enigmeFinal" && hasVisitedSecret === true) {
     const boutons = document.querySelector(".boutons");
     const btnVictoire = document.createElement("button");
     btnVictoire.textContent = "Affronter le Sphinx";
@@ -166,7 +176,6 @@ function goToChapter(chapter) {
   if (chapters[chapter].audio) {
     audio.src = chapters[chapter].audio;
     audio.autoplay = true;
-    video.muted = true;
     media.appendChild(audio);
   }
 
@@ -174,13 +183,17 @@ function goToChapter(chapter) {
   console.log("Voici le chapitre:", chapter);
   console.log("hasVisitedSecret:", hasVisitedSecret);
   console.log("hasVideo", hasVideo);
-
-  //local storage
-  const reini = document.querySelector(".reini");
-  reini.addEventListener("click", function() {
-  localStorage.clear();
-  goToChapter("debut");
-  });
 }
 
-goToChapter("debut");
+const reini = document.querySelector(".reini");
+reini.addEventListener("click", function () {
+  localStorage.clear();
+  goToChapter("debut");
+});
+
+//local storage
+if (localStorage.getItem('chapter') === null) {
+  goToChapter('debut');
+} else {
+  goToChapter(localStorage.getItem('chapter'));
+}
