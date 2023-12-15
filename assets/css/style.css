@@ -102,3 +102,20 @@ button:hover {
     top: 30px;
     left: 30px;
 }
+
+.mute {
+    position: absolute;
+    top: 63px;
+    left: 310px;
+}
+
+.mute-text {
+    position: absolute;
+    top: 60px;
+    left: 260px;
+    color: var(--jaune);
+}
+
+@media only screen and (max-width: 768px) {
+    
+}

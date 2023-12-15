@@ -157,6 +157,7 @@ function goToChapter(chapter) {
   const video = document.createElement("video");
   const image = document.createElement("img");
   const audio = document.createElement("audio");
+  const mute = document.querySelector(".mute");
 
   if (chapters[chapter].video) {
     media.innerHTML = "";
@@ -179,6 +180,22 @@ function goToChapter(chapter) {
     media.appendChild(audio);
   }
 
+  //bouton mute
+  mute.addEventListener('change', function () {
+    if (mute.checked) {
+      audio.muted = true
+      localStorage.setItem('audio', 'muted');
+    } else {
+      audio.muted = false
+      localStorage.setItem('audio', 'on');
+    }
+  })
+
+  if (localStorage.getItem('audio') === 'muted') {
+    mute.checked = true;
+    document.querySelector('audio').muted = true;
+  }
+
   //verificateurs
   console.log("Voici le chapitre:", chapter);
   console.log("hasVisitedSecret:", hasVisitedSecret);
@@ -197,3 +214,4 @@ if (localStorage.getItem('chapter') === null) {
 } else {
   goToChapter(localStorage.getItem('chapter'));
 }
+
